@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+        <title>{% block title %}Donne a li meme!{% endblock %}</title>
+        {% block stylesheets %}
+            <!-- CSS  -->
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}" />
+            <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap-theme.min.css') }}" />
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}" media="screen,projection"/>
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div class="site-wrapper">
+            <div class="site-wrapper-inner">
+                <div class="cover-container">
+                    <div class="masthead clearfix">
+                        <div class="inner">
+                            <h3 class="masthead-brand">D O N N E A L I</h3>
+                            <nav>
+                                <ul class="nav masthead-nav">       
+                                    <li {% if app.request.get('_route') == 'donations_donations_homepage' %} class="active"{% endif %}><a href="/">Accueil</a></li>
+                                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <li {% if app.request.get('_route') == 'fos_user_profile_show' %} class="active"{% endif %}><a href="/profile">{{app.user.username}}</a></li>
+                                    <li><a href="/logout">Deconnexion</a></li>
+                                    {% endif %}
+                                    {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                      <li {% if app.request.get('_route') == 'fos_user_registration_register' %} class="active"{% endif %}><a href="/register">Inscription</a></li>
+                                      <li {% if app.request.get('_route') == 'fos_user_security_login' %} class="active"{% endif %}><a href="/login">Connexion</a></li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    {%  block body %}
+                        <div class="inner cover">
+                            <h1 class="cover-heading">Faite un don !!</h1>
+                            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+                            <p class="lead">
+                                <a href="#" class="btn btn-lg btn-primary">FAIT UN DON</a>
+                            </p>
+                        </div>
+                    {% endblock %}
+                    <div class="mastfoot">
+                        <div class="inner">
+                            <p>Donneali </a>, by Lulu and Compagnie</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="../../dist/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    </body>
+</html>
