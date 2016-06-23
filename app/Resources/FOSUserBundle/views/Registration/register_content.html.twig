@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{#{% trans_default_domain 'FOSUserBundle' %}#}
+
+{% block body %}
+   
+{{form_start(form, {'method': 'POST', 'attr':{'class': 'register'}})}}
+
+
+<div align="center" class="button-wrap">
+    <button class="btn-large waves-effect waves-light" type="submit" name="action">
+        {{ 'registration.submit'|trans }}
+    </button>
+</div>
+{{ form_end(form) }}
+{% endblock %}
