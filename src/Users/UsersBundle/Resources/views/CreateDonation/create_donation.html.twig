@@ -1,57 +1,7 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <div class="row">
-        <div class="col s12 m8 offset-m2">
-            <h4 class="card-panel teal lighten-2 white-text center">Proposer un don</h4>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s12 m8 offset-m2">
-            <form action="" method="post">      
-                <div class="row">
-                    <div class="input-field col s12">
-                        <label for="title">Titre</label>
-                        <input type="text" id="title" name="_title" value="" required="required" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <label for="description">Description</label>
-                        <input type="text" id="description" name="_description" required="required" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <label for="city">Ville</label>
-                        <input type="text" id="title" name="_city" value="" required="required" />
-                    </div>
-                </div>
-                <div align="center" class="button-wrap">
-                    <button class="btn-large waves-effect waves-light" type="submit" id="_submit" name="_submit">
-                        Envoyer
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s12 m8 offset-m2">
-            <ul class="collection">
-                {% if listedonations != NULL %}
-                    {% for donation in listedonations %}
-                        <li class="collection-item avatar">
-                            <img src="images/yuna.jpg" alt="" class="circle">
-                            <span class="title">{{donation.title}}</span>
-                            <p>{{donation.description}}<br>
-                                Ville: {{donation.city}}<br>
-                                Date: {{donation.date|date('d-m-Y')}}
-                            </p>
-                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                        </li>
-                    {% endfor %}
-                {% endif %}
-            </ul>
-        </div>
-    </div>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
 {% endblock %}

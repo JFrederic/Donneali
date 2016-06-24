@@ -2,38 +2,53 @@
 
 namespace Users\UsersBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Donations\DonationsBundle\Entity\Donations;
+use Symfony\Component\HttpFoundation\Request;
 
-class CreateDonationController extends Controller
-{
-    public function CreateDonationAction()
-    {      
-        $em1 = $this->getDoctrine()->getManager(); 
-        $user = $em1->getRepository('UsersUsersBundle:Users')->find(1);
-        
+class CreateDonationController extends Controller {
+
+    public function CreateDonationAction(Request $request) {
+
+        //Setup a fresh $donation object
         $donation = new Donations();
-        $donation->setAvailable(true);
-        $donation->setCategory('Divers');
-        $donation->setCity('St-André');
         $donation->setDate(new \DateTime('now'));
-        $donation->setDescription('Chaussettes usagées');
-        $donation->setTitle('Chaussettes de Dimitri Payet');
-        $donation->setUser($user);
-        
-        $user->addDonation($donation);
-        
-        $em = $this->getDoctrine()->getEntityManager();
-        $em->persist($user);
-        $em->persist($donation);
-        $em->flush();
-        
-        $em3 = $this->getDoctrine()->getManager(); 
-        $listedonations = $em3->getRepository('DonationsDonationsBundle:Donations')
-                ->findBy(array('user' => $user->getId()));
-        
-        return $this->render('UsersUsersBundle:CreateDonation:create_donation.html.twig', 
-                array('listedonations' => $listedonations
+
+        $form = $this->createFormBuilder($donation)
+                ->add('category', TextType::class)
+                ->add('title', TextType::class)
+                ->add('description', TextType::class)
+                ->add('city', TextType::class)
+                ->add('save', SubmitType::class, array('label' => 'Envoyer'))
+                ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $donation->setAvailable(true);
+            $donation->setCategory($form->get('category')->getData());
+            $donation->setTitle($form->get('title')->getData());
+            $donation->setDescription($form->get('description')->getData());
+            $donation->setCity($form->get('city')->getData());
+
+            $user = $this->get('security.token_storage')->getToken()->getUser();
+
+            $donation->setUser($user);
+            $user->addDonation($donation);
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($user);
+            $em->persist($donation);
+            $em->flush();
+
+            return $this->redirectToRoute('task_success');
+        }
+
+        return $this->render('UsersUsersBundle:CreateDonation:create_donation.html.twig', array(
+                    'form' => $form->createView(),
         ));
     }
 
