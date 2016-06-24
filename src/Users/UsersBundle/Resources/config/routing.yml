@@ -1,10 +1,10 @@
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-    
+
 _create_donation:
     path:     /create/donation
     defaults: { _controller: UsersUsersBundle:CreateDonation:CreateDonation }
 
 _ask_donation:
-    path:     /ask/donation
+    path:     /ask/donation/{donId}
     defaults: { _controller: UsersUsersBundle:AskDonation:AskDonation }

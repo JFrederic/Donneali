@@ -10,4 +10,13 @@ namespace Donations\DonationsBundle\Repository;
  */
 class DonationsRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function getAvailableDon(){
+    $query = $this->createQueryBuilder('d')
+    ->leftJoin('d.associationsask','a')
+    ->addSelect('a')
+    ->where('d.available = 1')
+    ->getQuery();
+
+    return $query->getResult();
+  }
 }
