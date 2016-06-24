@@ -1,6 +1,11 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
+    {% if success %}
+        <div class="alert alert-success" role="alert">
+            Votre don a été mis en ligne avec succès
+        </div>    
+    {% endif %}
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
