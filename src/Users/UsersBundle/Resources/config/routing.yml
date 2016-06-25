@@ -8,3 +8,7 @@ _create_donation:
 _ask_donation:
     path:     /ask/donation/{donId}
     defaults: { _controller: UsersUsersBundle:AskDonation:AskDonation }
+
+_show_donation:
+    path:     /show/donation
+    defaults: { _controller: UsersUsersBundle:ShowDonation:ShowDonation }
