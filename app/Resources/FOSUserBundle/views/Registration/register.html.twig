@@ -1,13 +1,18 @@
 {% extends "base.html.twig" %}
+
 {% block body %}
-    <div class="row">
-        <div class="col s12 m8 offset-m2">
-            <h4 class="card-panel teal lighten-2 white-text center">Inscription</h4>
+    <form>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <h1>Inscription</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4">
+                    {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col s12 m8 offset-m2">
-            {% include "FOSUserBundle:Registration:register_content.html.twig" %}
-        </div>
-    </div>
+    </form>
 {% endblock body %}

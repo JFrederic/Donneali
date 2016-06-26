@@ -26,11 +26,12 @@ a:hover {
 
 html,
 body {
+
     height: 100%;
-    background: url("../image/pissenlit.jpg");
-    background-size: cover;
-  
+   /* background-size: cover; */
+
 }
+
 body {
 
     text-align: center;
@@ -65,7 +66,7 @@ body {
     padding: 0;
 }
 .lead{
-    color:white;
+    /*color:white;*/
 }
 
 /*
@@ -143,7 +144,7 @@ body {
 
 .mastfoot {
     color: #999; /* IE8 proofing */
-    color: #FFFFFF;
+    /*color: #FFFFFF;*/
 }
 
 
