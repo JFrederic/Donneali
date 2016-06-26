@@ -1,4 +1,4 @@
-Partage
-=======
+DonneALI
+========
 
-A Symfony project created on June 14, 2016, 6:45 pm.
+Création d'une application qui mettra en relation des associations caritatives et des personnes qui veulent faire des dons matériels.
