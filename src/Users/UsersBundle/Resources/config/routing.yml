@@ -12,3 +12,7 @@ _ask_donation:
 _show_donation:
     path:     /show/donation
     defaults: { _controller: UsersUsersBundle:ShowDonation:ShowDonation }
+
+_validate_donation:
+    path:     /validate/donation/{donId}/{assosId}
+    defaults: { _controller: UsersUsersBundle:ValidateDonation:ValidateDonation }

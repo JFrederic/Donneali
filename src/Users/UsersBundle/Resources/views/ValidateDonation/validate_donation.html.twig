@@ -1,0 +1,14 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    {% if success %}
+        <div class="alert alert-success" role="alert">
+            Votre don a été validé avec succès.
+            Un e-mail contenant vos coordonnés vient d'etre envoyé à l'association.
+        </div> 
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            Erreur: Validation du don impossible.
+        </div> 
+    {% endif %}
+{% endblock %}

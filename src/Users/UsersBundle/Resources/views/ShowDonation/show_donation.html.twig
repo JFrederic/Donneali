@@ -5,7 +5,7 @@
     <ul class="media-list">
         <li class="media">
             {% for donation in ListeDonationUser %}
-
+                {% if donation.available %}
                 <div class="media-left"> 
                     <a href="#"> 
                         <img data-holder-rendered="true" src="" style="width: 64px; height: 64px;" class="media-object" alt="64x64">
@@ -27,6 +27,7 @@
                         </ul>
                     </div>
                 </div> 
+             {% endif %}           
             {% endfor %}
         </li>
     </ul> 
