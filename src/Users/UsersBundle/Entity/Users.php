@@ -19,11 +19,25 @@ class Users extends BaseUser
     protected $id;
     
     /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=13)
+     */
+    private $phone;
+    
+    /**
      * @var bool
      *
      * @ORM\Column(name="type", type="boolean")
      */
     protected $type;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255)
+     */
+    private $description;
 
 
     //Relation pour définir le don de l'utilisateur

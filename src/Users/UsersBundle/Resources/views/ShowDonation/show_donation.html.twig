@@ -23,7 +23,9 @@
                             Choisir bénéficiaire<span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="/validate/donation/{{donation.id}}/{{donationasker.id}}">{{donationasker}}</a></li>
+                                <li class="dropdown-header">{{donationasker}}</li>
+                                    <li><a href="/validate/donation/{{donation.id}}/{{donationasker.id}}">{{donationasker.description}}</a></li>
+                                    <li class="divider"></li> 
                             {% else %}
                               <li>Aucune demande pour ce don.</li>
                               {% endfor %}
