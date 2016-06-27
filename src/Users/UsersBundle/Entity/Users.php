@@ -191,4 +191,52 @@ class Users extends BaseUser
     {
         return $this->type;
     }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     *
+     * @return Users
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Users
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 }
