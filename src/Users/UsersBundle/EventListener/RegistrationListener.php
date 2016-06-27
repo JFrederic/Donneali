@@ -4,6 +4,8 @@ namespace Users\UsersBundle\EventListener;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Listener responsible to change the redirection at the end of the password resetting
@@ -11,7 +13,12 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class RegistrationListener implements EventSubscriberInterface
 {
 
+  private $router;
 
+public function __construct(UrlGeneratorInterface $router)
+{
+    $this->router = $router;
+}
     /**
      * {@inheritDoc}
      */
@@ -28,8 +35,8 @@ class RegistrationListener implements EventSubscriberInterface
     {
 
 
-        //
-        // $event->setResponse(new RedirectResponse($url));
+
+
 
         $rolesParticulier = 'ROLE_PARTICULIER';
         $rolesAssos = 'ROLE_ASSOS';
@@ -44,6 +51,11 @@ class RegistrationListener implements EventSubscriberInterface
        else {
          $user->addRole($rolesParticulier);
        }
+
+       $url = $this->router->generate('homepage');
+
+          $event->setResponse(new RedirectResponse($url));
+
     }
 
 }

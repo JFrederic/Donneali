@@ -1,18 +1,18 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <form>
+
         <div class="form-group">
             <div class="row">
-                <div class="col-sm-4 col-sm-offset-4">
+                <div class="col-sm-4 col-sm-offset-5">
                     <h1>Inscription</h1>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-4 col-sm-offset-4">
+
+                <div class="col-md-7 col-md-offset-4 ">
                     {% include "FOSUserBundle:Registration:register_content.html.twig" %}
                 </div>
-            </div>
+
         </div>
-    </form>
+
 {% endblock body %}

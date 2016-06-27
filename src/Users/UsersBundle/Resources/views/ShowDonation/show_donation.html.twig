@@ -1,34 +1,38 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <h1>Gestion des dons</h1>
+    <!-- <h1>Gestion des dons</h1> -->
+    <div class="container">
+
+
     <ul class="media-list">
         <li class="media">
             {% for donation in ListeDonationUser %}
                 {% if donation.available %}
-                <div class="media-left"> 
-                    <a href="#"> 
+                <div class="media-left">
+                    <a href="#">
                         <img data-holder-rendered="true" src="" style="width: 64px; height: 64px;" class="media-object" alt="64x64">
-                    </a> 
-                </div> 
-                <div class="media-body"> 
-                    <h4 class="media-heading">{{donation.title}}</h4> 
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">{{donation.title}}</h4>
                     <p>{{donation.description}}</p>
+                    {% for donationasker in donation.getAssociationsask()%}
                     <div class="btn-group">
                         <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Choisir bénéficiaire<span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            {% for donationasker in donation.getAssociationsask()%}  
-                                <li>
-                                    <a href="/validate/donation/{{donation.id}}/{{donationasker.id}}">{{donationasker}}</a>
-                                </li>  
-                            {% endfor %}
+                            <li><a href="/validate/donation/{{donation.id}}/{{donationasker.id}}">{{donationasker}}</a></li>
+                            {% else %}
+                              <li>Aucune demande pour ce don.</li>
+                              {% endfor %}
                         </ul>
                     </div>
-                </div> 
-             {% endif %}           
+                </div>
+             {% endif %}
             {% endfor %}
         </li>
-    </ul> 
+    </ul>
+    </div>
 {% endblock %}

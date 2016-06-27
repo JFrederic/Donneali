@@ -7,14 +7,57 @@
 
 {% block body %}
 
+
+  <div class="row">
 {{ form_start(form, {'method': 'POST', 'attr':{'class': 'register'}}) }}
 
-{{ form_end(form) }}
+            <div class="col-md-6">
+                <!-- <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div> -->
+                <div class="form-group">
+                    <label for="InputName">{{form_label(form.username)}}</label>
+                    <div class="input-group">
+                      {{form_widget(form.username , {'attr': {'class' : 'form-control' , 'type' : 'text', 'required' : 'required' }})}}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputEmail">{{form_label(form.email)}}</label>
+                    <div class="input-group">
+                      {{form_widget(form.email , {'attr': {'class' : 'form-control' , 'type' : 'email' }})}}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputMessage">{{ form_label (form.plainPassword.first) }}   </label>
+                    <div class="input-group">
+                      {{ form_widget (form.plainPassword.first , {'attr': {'class' : 'form-control' , 'type' : 'password' }})}}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputMessage">{{ form_label (form.plainPassword.second) }}</label>
+                    <div class="input-group">
+                        {{ form_widget (form.plainPassword.second , {'attr': {'class' : 'form-control' , 'type' : 'password' }})}}
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
 
-<div align="center" class="button-wrap">
-    <button class="btn-large btn-primary" type="submit" name="action">
-        {{ 'registration.submit'|trans }}
-    </button>
+                {{ form_end(form) }}
+            </div>
+
+        <!-- <div class="col-lg-5 col-md-push-1">
+            <div class="col-md-12">
+                <div class="alert alert-success">
+                    <strong><span class="glyphicon glyphicon-ok"></span> Success! Message sent.</strong>
+                </div>
+                <div class="alert alert-danger">
+                    <span class="glyphicon glyphicon-remove"></span><strong> Error! Please check all page inputs.</strong>
+                </div>
+            </div>
+        </div> -->
 </div>
+
+
+
 
 {% endblock %}

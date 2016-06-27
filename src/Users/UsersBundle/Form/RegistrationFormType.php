@@ -5,6 +5,7 @@ namespace Users\UsersBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class RegistrationFormType extends AbstractType {
 
@@ -16,9 +17,12 @@ class RegistrationFormType extends AbstractType {
                 'Particulier',
                 'Association',
             ),
-        ));
- 
- 
+        ))
+        ->add('Enregistrer', SubmitType::class, array(
+    'attr' => array('class' => 'btn btn-info pull-right' , 'style' => 'background-color:#337AB7'),
+));
+
+
     }
 
     public function getParent() {
