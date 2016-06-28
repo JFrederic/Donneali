@@ -1,5 +1,11 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "base.html.twig" %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block body %}
+<h1 class="text-center">Edition du Profil</h1>
+    <hr class="style13">
+    <div class="form-group">
+        <div class="col-md-6 col-md-offset-3 ">
+            {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+        </div>
+    </div>
+{% endblock body %}
