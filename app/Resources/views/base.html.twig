@@ -31,16 +31,16 @@
                                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                     {% if is_granted('ROLE_PARTICULIER') %}
                                         <li {% if app.request.get('_route') == '_show_donation' %} class="active" {% endif %}>
-                                        <a href="/show/donation">Liste dons/demande </a>
+                                        <a href="/show/donation">Dons</a> <!--Rajouter un dropmenu-->
                                       </li>
                                     {% endif %}
                                     {% if is_granted('ROLE_ASSOS') %}
                                     <li {% if app.request.get('_route') == '_ask_donation' %} class="active" {% endif %}>
-                                    <a href="/ask/donation/0">Liste dons</a>
+                                    <a href="/ask/donation/0">Dons</a>
                                   </li>
                                     {% endif %}
                                         <li {% if app.request.get('_route') == 'fos_user_profile_show' %} class="active" {% endif %}>
-                                            <a href="/profile">{{app.user.username}}</a>
+                                            <a href="/profile">Profile</a> <!--Rajouter un dropmenu-->
                                         </li>
                                         <li>
                                             <a href="/logout">Deconnexion</a>
@@ -58,8 +58,6 @@
                             </nav>
                         </div>
                     </div>
-
-
                     {% block body %}
                         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <div id="banner">
@@ -67,20 +65,17 @@
                             <section>
                               <header class="major">
                                 <h2>Bienvenue sur votre espace personnel {{app.user.username}} !</h2>
-
                               </header>
                               {% if is_granted('ROLE_PARTICULIER') %}
-                              <a href="/create/donation" class="button alt">Faire un don</a>
+                                  <a href="/create/donation"><button type="button" class="btn btn-primary btn-lg">Faire un don</button></a>
                               {% endif %}
                               {% if is_granted('ROLE_ASSOS') %}
-                              <a href="/ask/donation/0"><button type="button" class="btn btn-primary btn-lg">Faire une demande</button></a>
+                              <a href="/ask/donation/0"><button type="button" class="btn btn-primary btn-lg">Voir la liste des dons</button></a>
                               {% endif %}
                             </section>
                           </div>
                         </div>
-
                         {% else %}
-
                         <div class="container">
                             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
@@ -89,7 +84,6 @@
                                     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                                     <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                                 </ol>
-
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner fixed-carrousel" role="listbox">
                                     <div class="item active">
@@ -112,7 +106,6 @@
                                     </div>
                                     ...
                                 </div>
-
                                 <!-- Controls -->
                                 <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -124,10 +117,8 @@
                                 </a>
                             </div>
                         </div>
-
                         {% endif %}
                     {% endblock %}
-
     <div class="mastfoot">
         <div class="inner">
             <p>Copyright DonneALI Team</p>
