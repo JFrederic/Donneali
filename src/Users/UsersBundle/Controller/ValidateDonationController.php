@@ -29,20 +29,20 @@ class ValidateDonationController extends Controller {
                         $em2->persist($assos);
                         $em->flush();
                         $em2->flush();
-/*
-                        $message = \Swift_Message::newInstance()
-                                ->setSubject('Don reçu')
-                                ->setFrom('$user->getEmail')
-                                ->setTo('$assos->getEmail')
-                                ->setBody(
-                                $this->renderView(
-                                        // app/Resources/views/Emails/registration.html.twig
-                                        'Emails/registration.html.twig', array('name' => $name)
-                                ), 'text/html'
-                                )
-                        ;
-                        $this->get('mailer')->send($message);
-*/
+                        /*
+                          $message = \Swift_Message::newInstance()
+                          ->setSubject('Don reçu')
+                          ->setFrom('$user->getEmail')
+                          ->setTo('$assos->getEmail')
+                          ->setBody(
+                          $this->renderView(
+                          // app/Resources/views/Emails/registration.html.twig
+                          'Emails/registration.html.twig', array('name' => $name)
+                          ), 'text/html'
+                          )
+                          ;
+                          $this->get('mailer')->send($message);
+                         */
                         return $this->render('UsersUsersBundle:ValidateDonation:validate_donation.html.twig', array(
                                     'success' => true
                         ));

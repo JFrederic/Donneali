@@ -67,12 +67,12 @@
                                     <section>
                                         <header class="major">
                                             <h2>Bienvenue sur votre espace personnel
-                                                <span class="byline">{{app.user.username}}</span>
-                                                !</h2>
+                                              {{app.user.username}} ! </h2>
                                         </header>
                                         {% if is_granted('ROLE_PARTICULIER') %}
                                             <a href="/create/donation">
-                                                <button type="button" class="btn btn-primary btn-lg">Faire un don</button>
+
+                                                <button type="button" class="btn btn-primary btn-lg centrer">Faire un don</button>
                                             </a>
                                         {% endif %}
                                         {% if is_granted('ROLE_ASSOS') %}

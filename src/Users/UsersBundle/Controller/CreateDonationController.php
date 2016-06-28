@@ -43,15 +43,10 @@ class CreateDonationController extends Controller {
             $em->persist($user);
             $em->persist($donation);
             $em->flush();
-/*
-            return $this->redirectToRoute('_create_donation', array(
-                    'form' => $form->createView(), 'success' => true
-        ));
-   */         
+
             return $this->render('UsersUsersBundle:CreateDonation:create_donation.html.twig', array(
-                    'form' => $form->createView(), 'success' => true
-        ));
- 
+                        'form' => $form->createView(), 'success' => true
+            ));
         }
 
         return $this->render('UsersUsersBundle:CreateDonation:create_donation.html.twig', array(
