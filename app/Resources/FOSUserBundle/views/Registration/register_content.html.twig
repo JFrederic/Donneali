@@ -3,7 +3,6 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 {% block body %}
-
     <div class="row">
         {{ form_start(form, {'method': 'POST', 'attr':{'class': 'register'}}) }}
         <div class="col-md-6">
@@ -32,6 +31,13 @@
                 <label for="InputMessage">{{ form_label (form.plainPassword.second) }}</label>
                 <div class="input-group">
                     {{ form_widget (form.plainPassword.second , {'attr': {'class' : 'form-control' , 'type' : 'password' }})}}
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="InputMessage">{{ form_label (form.type) }}</label>
+                <div class="input-group">
+                    {{ form_widget (form.type , {'attr': {'class' : 'form-control' , 'type' : 'password' }})}}
                     <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                 </div>
             </div>
