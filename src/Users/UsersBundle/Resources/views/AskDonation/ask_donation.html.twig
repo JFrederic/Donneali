@@ -1,16 +1,9 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-
-
-
-
-
       <h1 class="text-center">Liste des dons disponibles</h1>
       <hr class="style13">
-
       {% for donation in ListeDonation %}
-
         <div class="col-sm-6 col-md-4">
           <div class="thumbnail">
             <!-- <img src="..." alt="..."> -->
@@ -24,15 +17,10 @@
               <p>
                Mise en ligne : {{donation.date|date('d/m/Y')}}
               </p>
-
               <p><a href="/ask/donation/{{donation.id}}" class="btn btn-primary " role="button">Enquerir</a>
               </center>
             </div>
           </div>
         </div>
-
     {% endfor %}
-
-
-
 {% endblock %}
