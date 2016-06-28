@@ -67,11 +67,10 @@
                                     <section>
                                         <header class="major">
                                             <h2>Bienvenue sur votre espace personnel
-                                              {{app.user.username}} ! </h2>
+                                                {{app.user.username}} ! </h2>
                                         </header>
                                         {% if is_granted('ROLE_PARTICULIER') %}
                                             <a href="/create/donation">
-
                                                 <button type="button" class="btn btn-primary btn-lg centrer">Faire un don</button>
                                             </a>
                                         {% endif %}
@@ -89,8 +88,9 @@
                                     <div class="col-sm-12">
                                         <div class="text-center">
                                             <h2>
-                                                <span>
-                                                    Bienvenue sur notre site de dons en ligne.</span><br></h2>
+                                                <span>Bienvenue sur notre site de dons en ligne.</span>
+                                            </h2>
+                                            <br>
                                             <h3>
                                                 Voici une plateforme qui permet de mettre en contact les associations et les particuliers , pour pouvoir combler les réels besoins des association.
                                             </h3>
