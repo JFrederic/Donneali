@@ -1,4 +1,5 @@
 <?php
+
 namespace Users\UsersBundle\EventListener;
 
 use FOS\UserBundle\FOSUserEvents;
@@ -10,52 +11,37 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 /**
  * Listener responsible to change the redirection at the end of the password resetting
  */
-class RegistrationListener implements EventSubscriberInterface
-{
+class RegistrationListener implements EventSubscriberInterface {
 
-  private $router;
+    private $router;
 
-public function __construct(UrlGeneratorInterface $router)
-{
-    $this->router = $router;
-}
+    public function __construct(UrlGeneratorInterface $router) {
+        $this->router = $router;
+    }
+
     /**
      * {@inheritDoc}
      */
-
-
-    public static function getSubscribedEvents()
-    {
+    public static function getSubscribedEvents() {
         return array(
             FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess',
         );
     }
 
-    public function onRegistrationSuccess(FormEvent $event)
-    {
+    public function onRegistrationSuccess(FormEvent $event) {
 
+        /** @var $user \FOS\UserBundle\Model\UserInterface */
+        $user = $event->getForm()->getData();
 
+        if ($user->getType()) {
+            $user->addRole('ROLE_ASSOS');
+        } else {
+            $user->addRole('ROLE_PARTICULIER');
+        }
 
+        $url = $this->router->generate('homepage');
 
-
-        $rolesParticulier = 'ROLE_PARTICULIER';
-        $rolesAssos = 'ROLE_ASSOS';
-
-       /** @var $user \FOS\UserBundle\Model\UserInterface */
-       $user = $event->getForm()->getData();
-
-       if($user->getType() == 1)
-       {
-         $user->addRole($rolesAssos);
-       }
-       else {
-         $user->addRole($rolesParticulier);
-       }
-
-       $url = $this->router->generate('homepage');
-
-          $event->setResponse(new RedirectResponse($url));
-
+        $event->setResponse(new RedirectResponse($url));
     }
 
 }

@@ -21,7 +21,7 @@ class Users extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=13)
+     * @ORM\Column(name="phone", type="string", nullable=true, length=13)
      */
     private $phone;
     
@@ -35,7 +35,7 @@ class Users extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string",  nullable=true, length=255)
      */
     private $description;
 
