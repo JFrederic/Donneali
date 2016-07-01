@@ -11,7 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 class CreateDonationController extends Controller {
 
     public function CreateDonationAction(Request $request) {
-
+        
+        $success = false;
         //Setup a fresh $donation object
         $donation = new Donations();
         $donation->setDate(new \DateTime('now'));
@@ -43,14 +44,11 @@ class CreateDonationController extends Controller {
             $em->persist($user);
             $em->persist($donation);
             $em->flush();
-
-            return $this->render('UsersUsersBundle:CreateDonation:create_donation.html.twig', array(
-                        'form' => $form->createView(), 'success' => true
-            ));
+            $success = true;
         }
 
         return $this->render('UsersUsersBundle:CreateDonation:create_donation.html.twig', array(
-                    'form' => $form->createView(), 'success' => false
+                    'form' => $form->createView(), 'success' => $success
         ));
     }
 

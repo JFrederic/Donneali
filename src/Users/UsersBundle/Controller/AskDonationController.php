@@ -23,11 +23,7 @@ class AskDonationController extends Controller {
             $em2->persist($don);
             $em2->flush();
         }
-        /*
-          $ListeDonation = $this->getDoctrine()
-          ->getRepository('DonationsDonationsBundle:Donations')
-          ->getAvailableDon();
-         */
+
         $ListeDonation = $this->getDoctrine()
                 ->getRepository('DonationsDonationsBundle:Donations')
                 ->findByAvailable(1);
