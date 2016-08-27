@@ -13,13 +13,15 @@ class RegistrationFormType extends AbstractType {
         parent::buildForm($builder, $options);
 
         $builder->add('type', ChoiceType::class, array(
+
                     'choices' => array(
                         'Particulier',
                         'Association',
                     ),
+
                 ))
                 ->add('Créer un compte', SubmitType::class, array(
-                    'attr' => array('class' => 'btn btn-lg btn-primary btn-block'),
+                    'attr' => array('class' => 'btn btn-lg btn-primary btn-block' , 'style' => 'margin-top:30px; margin-left:0;'),
         ));
     }
 

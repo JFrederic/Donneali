@@ -1,26 +1,62 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-      <h1 class="text-center">Liste des dons disponibles</h1>
-      <hr class="style13">
-      {% for donation in ListeDonation %}
-        <div class="col-sm-6 col-md-4">
-          <div class="thumbnail">
-            <!-- <img src="..." alt="..."> -->
-            <div class="caption">
-              <center>
-              <h3>Titre : {{donation.title}}</h3>
-              <p>Ville : {{donation.city}}</p>
-              <p>
-                Description : {{donation.description}}
-              </p>
-              <p>
-               Mise en ligne : {{donation.date|date('d/m/Y')}}
-              </p>
-              <p><a href="/ask/donation/{{donation.id}}" class="btn btn-primary " role="button">Enquerir</a>
-              </center>
+    <h1 class="text-center">Liste des dons disponibles</h1>
+    <hr class="style13">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 ">
+                {% if ListeDonation|length == 0 %}
+                    <div class="card card-outline-info text-xs-center">
+                        <div class="card-block">
+                            <blockquote class="card-blockquote">
+                                <h5>Aucune dons disponible pour le moment</h5>
+                            </blockquote>
+                        </div>
+                    </div>
+
+                {% else %}
+                    <div class="card">
+                        <div class="card-block" style="padding: 0;">
+                            {% for donation in ListeDonation %}
+
+                                <ul class="media-list">
+                                    <li class="media">
+                                        <a class="media-left" href="#">
+                                            {% set imgDon = '/images/products/' ~ donation.imageName %}
+                                            {% if donation.imageName != null %}
+                                                <img src="{{imgDon}}" class="media-object" alt="Generic placeholder image">
+                                            {% else %}
+                                                <img src="/image/no-picture.png" class="media-object" alt="Generic placeholder image">
+
+                                            {% endif %}
+                                        </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">{{donation.title}}</h4>
+                                            <p>{{donation.category}}<br>{{donation.city}}</p>
+                                            <aside class="item-absolute-top">
+                                                <p>
+                                                    <a href="/ask/donation/{{donation.id}}" class="btn btn-primary " role="button">Enquerir</a>
+                                                </aside>
+                                                <aside class="item-absolute">
+                                                    <p class="item-date">
+                                                        Le
+                                                        {{donation.date|date("d/m/Y")}}
+                                                        à
+                                                        {{donation.date|date("H:i")}}
+                                                    </p>
+                                                </aside>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-    {% endfor %}
-{% endblock %}
+    {% endblock %}

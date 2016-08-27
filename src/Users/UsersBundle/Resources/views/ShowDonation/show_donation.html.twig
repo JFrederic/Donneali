@@ -4,44 +4,69 @@
     <h1 class="text-center">Gestion des dons</h1>
     <hr class="style13">
     <div class="container">
-        {% for donation in ListeDonationUser %}
-            {% if donation.available %}
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <!-- <img src="..." alt="..."> -->
-                        <div class="caption">
-                            <center>
-                                <h3>Titre :
-                                    {{donation.title}}</h3>
-                                <p>Ville :
-                                    {{donation.city}}</p>
-                                <p>
-                                    Description :
-                                    {{donation.description}}
-                                </p>
-                                <p>
-                                    Mise en ligne :
-                                    {{donation.date|date('d/m/Y')}}
-                                </p>
-                                <!-- Single button -->
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Choisir bénificiaire
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        {% for donationasker in donation.getAssociationsask()%}
-                                            <li>
-                                                <a href="/validate/donation/{{donation.id}}/{{donationasker.id}}">{{donationasker}}</a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </center>
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
-        {% endfor %}
+      <!--Shopping Cart table-->
+
+
+      <div class="table-responsive">
+          <table class="table product-table">
+              <!--Table head-->
+              <thead>
+                  <tr>
+                      <th></th>
+                      <th>Titre</th>
+                      <th>Lieux</th>
+                      <th>Description</th>
+                      <th>Mise en ligne</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <!--/Table head-->
+
+              <!--Table body-->
+              <tbody>
+
+                  <!--First row-->
+                  {% for donation in ListeDonationUser %}
+                    {% if donation.available %}
+                      {% for donationasker in donation.getAssociationsask()%}
+
+                  <tr>
+                      <th scope="row">
+                        {% set imgDon = 'images/products/' ~ donation.imageName %}
+                        {% if donation.imageName != null %}
+                          <img src="{{imgDon}}" alt="" class="img-fluid">
+                        {% else %}
+                          <img  src="/image/no-picture.png" alt="" class="img-fluid">
+                        {% endif %}
+
+                      </th>
+                      <td>
+                          <h5><strong>{{donation.title}}</strong></h5>
+                          <p class="text-muted">demander par {{donationasker}}.</p>
+                      </td>
+                      <td>{{donation.city}}</td>
+                      <td>{{donation.description}}</td>
+                      <td>{{donation.date|date('d/m/Y')}}</td>
+                      <td>
+                        <a href="/validate/donation/{{donation.id}}/{{donationasker.id}}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Accepter"><i class="icon-ok"></i></a>
+                        
+                      </td>
+                  </tr>
+                  <!--/First row-->
+                      {% endfor %}
+                    {% endif %}
+                {% endfor %}
+
+              </tbody>
+              <!--/Table body-->
+          </table>
+      </div>
+      <!--/Shopping Cart table-->
+
     </div>
+
+
+
+
+
 {% endblock %}

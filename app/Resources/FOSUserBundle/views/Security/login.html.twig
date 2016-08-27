@@ -8,22 +8,47 @@
     {% if error %}
          <div class="alert alert-warning text-center" role="alert">
             {{ error.messageKey|trans(error.messageData, 'security') }}
-        </div> 
+        </div>
     {% endif %}
+
     <div class="container">
+      <div class="col-md-6 col-md-offset-3 login-p-t">
+
         <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
-            <label for="username" class="sr-only">{{ 'security.login.username'|trans }}</label>
-            <input type="text" class="form-control" id="username" name="_username" value="" placeholder="Nom d'utilisateur"/>
-            <label for="inputPassword" class="sr-only">{{ 'security.login.password'|trans }}</label>
-            <input type="password" class="form-control" id="password" name="_password" placeholder="Mot de passe"/>
+          <div class="md-form">
+
+            <i class="fa fa-user prefix"></i>
+            <input type="text" class="form-control " id="username" name="_username" value="" placeholder="Nom d'utilisateur"/>
+            <label for="username" data-error="wrong" data-success="right" class="sr-only">{{ 'security.login.username'|trans }}</label>
+          </div>
+          <div class="md-form">
+
+            <i class="fa fa-lock prefix"></i>
+            <input type="password" class="form-control " id="password" name="_password" placeholder="Mot de passe"/>
+            <label for="inputPassword" data-error="wrong" data-success="right" class="sr-only">{{ 'security.login.password'|trans }}</label>
+          </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" id="remember_me" name="_remember_me" value="on">
-                    Se souvenir de moi
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on"> <span>Se souvenir de moi</span>
                 </label>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">{{ 'security.login.submit'|trans }}</button>
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+            <div class="button">
+
+              <button class="btn center btn-theme btn-lg " type="submit">{{ 'security.login.submit'|trans }}</button>
+              <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+            </div>
         </form>
+      </div>
+
+
     </div>
+    <div class="container pt50">
+      <blockquote class="text-xs-center">
+        Vous n'avez pas encore de compte ? <a href="/register">Cliquez ici pour vous s'inscrire !</a>
+      </blockquote>
+
+    </div>
+
 {% endblock body %}
+
+{% block footer %}{% endblock %}

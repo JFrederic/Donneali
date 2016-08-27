@@ -3,7 +3,9 @@
 namespace Users\UsersBundle\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Donations\DonationsBundle\Entity\Donations;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,18 +13,21 @@ use Symfony\Component\HttpFoundation\Request;
 class CreateDonationController extends Controller {
 
     public function CreateDonationAction(Request $request) {
-        
+
         $success = false;
         //Setup a fresh $donation object
         $donation = new Donations();
         $donation->setDate(new \DateTime('now'));
 
         $form = $this->createFormBuilder($donation)
-                ->add('category', TextType::class)
-                ->add('title', TextType::class)
-                ->add('description', TextType::class)
-                ->add('city', TextType::class)
-                ->add('save', SubmitType::class, array('label' => 'Envoyer'))
+                ->add('category', TextType::class , array('label' => 'Catégorie'))
+                ->add('title', TextType::class , array('label' => 'Titre'))
+                ->add('description', TextareaType::class)
+                ->add('city', TextType::class , array('label' => 'Lieux'))
+                ->add('imageFile', VichImageType::class, array('label' => ' ', 'required' => false))
+                ->add('save', SubmitType::class, array('label' => 'Envoyer' ,
+                      'attr' =>  array('class' => 'btn btn-primary-outline waves-effect'),
+                    ))
                 ->getForm();
 
         $form->handleRequest($request);

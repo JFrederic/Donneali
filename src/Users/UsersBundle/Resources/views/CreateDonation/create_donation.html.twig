@@ -1,14 +1,14 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <h1 class="text-center">Description du don</h1>
+    <h1 class="text-xs-center">Description du don</h1>
     <hr class="style13">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-6 col-md-offset-3 pt50 pb100">
                 {{ form_start(form) }}
                 {% if success %}
-                    <div class="alert alert-success text-center" role="alert">
+                    <div class="alert alert-success text-xs-center" role="alert">
                         Votre don a été mis en ligne avec succès
                     </div>
                 {% endif %}
@@ -22,14 +22,22 @@
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="formGroupExampleInput">{{form_label(form.description)}}</label>
-                    {{form_widget(form.description , {'attr' : {'class' : 'form-control' , 'type' : 'text'}})}}
+                    {{form_widget(form.description , {'attr' : {'class' : 'form-control md-textarea' , 'type' : 'text'}})}}
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="formGroupExampleInput">{{form_label(form.city)}}</label>
                     {{form_widget(form.city , {'attr' : {'class' : 'form-control' , 'type' : 'text'}})}}
                 </fieldset>
+
+                  <fieldset class="form-group">
+                      <label for="formGroupExampleInput">Choisir une image</label>
+                    {{ form_widget(form.imageFile) }}
+                  </fieldset>
+
+
                 {{ form_end(form) }}
             </div>
         </div>
     </div>
+
 {% endblock %}

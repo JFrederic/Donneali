@@ -19,6 +19,8 @@ class AppKernel extends Kernel
             new Users\UsersBundle\UsersUsersBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Donations\DonationsBundle\DonationsDonationsBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

@@ -9,117 +9,419 @@
         {% block stylesheets %}
             <!-- CSS  -->
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <link href='http://fonts.googleapis.com/css?family=Open+Sans|Maven+Pro:500' rel='stylesheet' type='text/css'>
+            <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
             <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
-            <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}"/>
-            <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap-theme.min.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('MDB-Free/css/mdb.min.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('MDB-Free/css/bootstrap.min.css') }}"/>
             <link rel="stylesheet" href="{{ asset('css/style.css') }}" media="screen,projection"/>
         {% endblock %}
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     </head>
     <body>
-        <div class="site-wrapper">
-            <div class="site-wrapper-inner">
-                <div class="cover-container">
-                    <div class="masthead clearfix">
-                        <div class="inner">
-                            <h3 class="masthead-brand">D O N N E A L I</h3>
-                            <nav>
-                                <ul class="nav masthead-nav">
-                                    <li {% if app.request.get('_route') == 'donations_donations_homepage' %} class="active" {% endif %}>
-                                        <a href="/">Accueil</a>
-                                    </li>
-                                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                        {% if is_granted('ROLE_PARTICULIER') %}
-                                            <li {% if app.request.get('_route') == '_show_donation' %} class="active" {% endif %}>
-                                                <a href="/show/donation">Dons</a>
-                                                <!--Rajouter un dropmenu-->
-                                            </li>
-                                        {% endif %}
-                                        {% if is_granted('ROLE_ASSOS') %}
-                                            <li {% if app.request.get('_route') == '_ask_donation' %} class="active" {% endif %}>
-                                                <a href="/ask/donation/0">Dons</a>
-                                            </li>
-                                        {% endif %}
-                                        <li {% if app.request.get('_route') == 'fos_user_profile_show' %} class="active" {% endif %}>
-                                            <a href="/profile">Profile</a>
-                                            <!--Rajouter un dropmenu-->
-                                        </li>
-                                        <li>
-                                            <a href="/logout">Deconnexion</a>
-                                        </li>
+
+        <!--Navbar-->
+        {% if app.request.get('_route') == 'donations_donations_homepage' and not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+            <nav class="navbar navbar-dark navbar-fixed-top  scrolling-navbar">
+            {% else %}
+
+                <nav class="navbar navbar-dark scrolling-navbar" style="background-color:#1C2331;">
+                {% endif %}
+
+                <!-- Collapse button-->
+                <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx2">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!--Collapse content-->
+                <div class="collapse navbar-toggleable-xs" id="collapseEx2">
+                    <!--Navbar Brand-->
+                    <a class="navbar-brand text-primary" href="#">D O N N E A L I</a>
+                    <!--Links-->
+                    <ul class="nav navbar-nav pull-*-right">
+                        <li {% if app.request.get('_route') == 'donations_donations_homepage' %} class="nav-item active" {% else %} class="nav-item " {% endif %}>
+
+                            <a class="nav-link" href="/">Accueil</a>
+                        </li>
+
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            {% if is_granted('ROLE_PARTICULIER') %}
+                                <li {% if app.request.get('_route') == '_show_donation' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                                    <a class="nav-link" href="/show/donation">Gestion</a>
+                                </li>
+                            {% endif %}
+                            {% if is_granted('ROLE_ASSOS') %}
+                                <li {% if app.request.get('_route') == '_ask_donation' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+
+                                    <a class="nav-link" href="/ask/donation/0">Dons</a>
+
+                                </li>
+                            {% endif %}
+
+                            <li class="nav-item dropdown" {% if app.request.get('_route') == 'fos_user_profile_show' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                                <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon compte</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <a class="dropdown-item" href="#">Modifier mot de passe</a>
+                                    <a class="dropdown-item" href="#">Modifier compte</a>
+                                    {% if is_granted('ROLE_ASSOS') %}
+                                        <a class="dropdown-item" href="#">Voir dons récolter</a>
                                     {% endif %}
-                                    {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                        <li {% if app.request.get('_route') == 'fos_user_registration_register' %} class="active" {% endif %}>
-                                            <a href="/register">Inscription</a>
-                                        </li>
-                                        <li {% if app.request.get('_route') == 'fos_user_security_login' %} class="active" {% endif %}>
-                                            <a href="/login">Connexion</a>
-                                        </li>
+
+                                    {% if is_granted('ROLE_PARTICULIER') %}
+                                        <a class="dropdown-item" href="#">Voir dons délivrer</a>
                                     {% endif %}
-                                </ul>
-                            </nav>
-                        </div>
+
+                                </div>
+                            </li>
+
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Deconnexion</a>
+                        </li>
+
+                    {% endif %}
+
+                    {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+                        <li {% if app.request.get('_route') == 'fos_user_registration_register'   %} class="nav-item active" {% else %} class="nav-item " {% endif %}>
+                            <a class="nav-link" href="/register">Inscription</a>
+                        </li>
+                        <li {% if app.request.get('_route') == 'fos_user_security_login'  %} class="nav-item active" {% else %} class="nav-item " {% endif %}>
+                            <a class="nav-link" href="/login">Connexion</a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+
+            </div>
+            <!--/.Collapse content-->
+
+        </nav>
+        <!--/.Navbar-->
+
+        {% block body %}
+
+            {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+
+                <div class="view hm-black-light">
+                    <div class="full-bg-img flex-center">
+                        <ul class="animated fadeInUp col-md-12">
+                            <li>
+                                <h1 class="h1-responsive flex-item" style="padding:0;">Bienvenue sur DonneAli!
+                                </h1>
+                            <li>
+                                <p class="flex-item">Plateforme de don en ligne mettant en relations des associations et des donateurs particulier.
+                                    <br>
+                                    Joignez altruisme et bonne action en vous inscrivant sur notre site !</p>
+                            </li>
+                            <li>
+                                <a href="/login" class="btn btn-primary btn-lg">
+                                    <i class="icon-hand-right"></i>
+                                    Don'Ali</a>
+                            </li>
+
+                        </ul>
+
+                        <a class="arrow-wrap" href="#content">
+                            <span class="arrow"></span>
+                            <!--<span class="hint">scroll</span>-->
+                        </a>
                     </div>
-                    {% block body %}
-                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                            <div id="banner">
-                                <div class="container">
-                                    <section>
-                                        <header class="major">
-                                            <h2>Bienvenue sur votre espace personnel
-                                                {{app.user.username}} ! </h2>
-                                        </header>
-                                        {% if is_granted('ROLE_PARTICULIER') %}
-                                            <a href="/create/donation">
-                                                <button type="button" class="btn btn-primary btn-lg centrer">Faire un don</button>
-                                            </a>
+                </div>
+
+                <section class="pt100 pb100" id="content">
+
+                    <div class="container">
+                        <div class="row">
+
+                            <h2 class="text-xs-center">Les derniers dons mis en ligne</h2>
+
+                            <br>
+                            <hr class="style13">
+                            <br>
+                            <div class="col-md-10 col-md-offset-1">
+                                {% if listedonations is empty %}
+
+                                    <div class="card card-outline-info text-xs-center">
+                                        <div class="card-block">
+                                            <blockquote class="card-blockquote">
+                                                <h5>Il n'y a pas de dons disponible pour le moment...</h5>
+                                                <footer>Pour faire un don
+                                                    <cite title="Source Title">
+                                                        <a href="/create/donation" class="text-info">cliquez-ici</a>
+                                                    </cite>
+                                                </footer>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+
+                                {% else %}
+                                    <div class="card">
+                                        <div class="card-block" style="padding: 0;">
+                                            {% for donation in listedonations | reverse | slice(0, 5) %}
+
+                                                <ul class="media-list">
+                                                    <li class="media">
+                                                        <a class="media-left" href="/login">
+                                                            {% set imgDon = 'images/products/' ~ donation.imageName %}
+                                                            {% if donation.imageName != null %}
+                                                                <img src="{{imgDon}}" class="media-object" alt="Generic placeholder image">
+                                                            {% else %}
+                                                                <img src="/image/no-picture.png" class="media-object" alt="Generic placeholder image">
+
+                                                            {% endif %}
+                                                        </a>
+                                                        <div class="media-body">
+                                                            <h4 class="media-heading">{{donation.title}}</h4>
+                                                            <p class="info">{{donation.category}}<br>{{donation.city}}</p>
+                                                            <aside class="item-absolute">
+
+                                                                <p class="item-date">
+                                                                    Le
+                                                                    {{donation.date|date("d/m/Y")}}
+                                                                    à
+                                                                    {{donation.date|date("H:i")}}
+                                                                </p>
+                                                            </aside>
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                            {% endfor %}
+
                                         {% endif %}
-                                        {% if is_granted('ROLE_ASSOS') %}
-                                            <a href="/ask/donation/0">
-                                                <button type="button" class="btn btn-primary btn-lg">Voir la liste des dons</button>
-                                            </a>
-                                        {% endif %}
-                                    </section>
+                                    </div>
                                 </div>
                             </div>
-                        {% else %}
-                            <div class="background-image">
+                        </div>
+                    </div>
+
+                </section>
+                <!--Footer-->
+                <footer class="page-footer center-on-small-only">
+                    <!--Call to action-->
+                    <div class="call-to-action">
+                        <h4>Made at
+                            <a target="_blank" href="http://simplonreunion.co " class="text-info">Simplon Réunion</a>
+                        </h4>
+
+                    </div>
+                    <!--/.Call to action-->
+
+                    <!--Copyright-->
+                    <div class="footer-copyright">
+                        <div class="container-fluid">
+                            © 2016 Copyright:
+                            <a target="_blank" href="http://donneali.simplonreunion.co">
+                                Don'ali team
+                            </a>
+
+                        </div>
+                    </div>
+                    <!--/.Copyright-->
+
+                </footer>
+                <!--/.Footer-->
+            {% else %}
+                <div id="banner">
+                    <section class="jumbotron">
+                        <div class="container">
+
+                            <h2 class="text-xs-center">Bienvenue sur votre espace personnel
+                                <span class="text-danger">
+                                    {{app.user.username}}
+                                </span>
+                                !
+                            </h2>
+                            <center>
+                                {% if is_granted('ROLE_PARTICULIER') %}
+
+                                    <a href="/create/donation">
+                                        <button type="button" class="btn btn-primary btn-lg centrer">Faire un don</button>
+                                    </a>
+                                {% endif %}
+                                {% if is_granted('ROLE_ASSOS') %}
+                                    <a href="/ask/donation/0">
+                                        <button type="button" class="btn btn-primary btn-lg">Voir la liste des dons</button>
+                                    </a>
+                                {% endif %}
+                            </center>
+                        </div>
+                    </section>
+
+                    {% if is_granted('ROLE_PARTICULIER') %}
+                        <section class="particulier-space">
+
+                            <div class="container">
                                 <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="text-center">
-                                            <h2>
-                                                <span>Bienvenue sur notre site de dons en ligne.</span>
-                                            </h2>
-                                            <br>
-                                            <h3>
-                                                DonneALI est une plateforme qui facilite le contact entre les associations et les particuliers , afin de combler au mieux les besoins des associations.
-                                            </h3>
-                                            <button class="btn btn-primary btn-lg" id="singlebutton">
-                                                DonneALI</button>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-block">
+
+                                                <h5 class="text-xs-center">Vos derniers dons mis en ligne</h5>
+
+                                                <br>
+                                                <hr class="style8">
+                                                <br>
+
+                                                {% if listedonations is empty %}
+                                                    <p class="text-xs-center text-danger">
+                                                        Vous n'avez ajouter aucun don en ligne.
+                                                    </p>
+                                                {% else %}
+                                                    {% set counter = 0 %}
+                                                    <ul class="list-group">
+                                                        {% for donation in listedonations | reverse | slice(0, 3) %}
+
+                                                            <li class="list-group-item">
+                                                                <span class="tag tag-default tag-pill pull-xs-right">
+                                                                    {% if donation.association != null %}
+                                                                        {% set counter = counter + 1 %}
+                                                                    {% endif %}
+
+                                                                </span>
+                                                                {{donation.title}}
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-block">
+
+                                                <h5 class="text-xs-center">Vos dernières donations</h5>
+
+                                                <br>
+                                                <hr class="style8">
+                                                <br>
+
+                                                {% for donation in listedonations | reverse | slice(0, 3) %}
+                                                    {% if donation.association == null %}
+                                                        <p class="text-xs-center text-danger"></p>
+                                                    {% else %}
+                                                        <ul class="list-group">
+                                                            <li class="list-group-item list-group-item-action list-group-item-success">{{donation.title}}
+                                                                donnée à
+                                                                {{donation.association}}</li>
+                                                        </ul>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </section>
+                    {% else %}
+                        {% if is_granted('ROLE_ASSOS') %}
+                            <section class="particulier-space">
+
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-block">
+
+                                                    <h5 class="text-xs-center">Vos demande en cours</h5>
+
+                                                    <br>
+                                                    <hr class="style8">
+                                                    <br>
+
+                                                    {% for donation in listedonations | reverse | slice(0, 3) %}
+                                                        <ul class="list-group">
+
+                                                            {% for donationasker in donation.getAssociationsask()%}
+
+                                                                {% if donationasker.id == user.id and donation.available != 0 %}
+                                                                    <li class="list-group-item">
+                                                                        <span class="tag tag-default tag-pill pull-xs-right"></span>
+                                                                        {{donation.title}}
+                                                                        {{dump(donation.getAssociationsask())}}
+                                                                    </li>
+                                                                {% else %}
+                                                                    {% if donationasker in donation.getAssociationsask() %}
+                                                                        <p class="text-xs-center text-danger">
+                                                                            Vous n'avez aucune demande en cours.
+                                                                        </p>
+                                                                    {% endif %}
+                                                                {% endif %}
+
+                                                            {% endfor %}
+                                                        {% endfor %}
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-block">
+
+                                                    <h5 class="text-xs-center">Vos dernier dons collecter</h5>
+
+                                                    <br>
+                                                    <hr class="style8">
+                                                    <br>
+
+                                                    {% if listedonations | length == 0 %}
+                                                        <p class="text-xs-center text-danger">
+                                                            Vous n'avez encore rien collecter !
+                                                            <br>
+                                                            Consultez la liste des dons encore disponible en cliquant
+                                                            <a href="/ask/donation/0" class="text-info">ici</a>
+                                                        </p>
+                                                    {% else %}
+
+                                                        <ul class="list-group">
+                                                            {% for donation in listedonations | reverse | slice(0, 3) %}
+                                                                {% if donation.association != null %}
+                                                                    <li class="list-group-item">
+                                                                        <span class="tag tag-default tag-pill pull-xs-right"></span>
+                                                                        {{donation.title}}
+                                                                    </li>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         {% endif %}
-                    {% endblock %}
-                    <div class="mastfoot">
-                        <div class="inner">
-                            <p>Copyright DonneALI Team</p>
-                        </div>
-                    </div>
+                    {% endif %}
+
                 </div>
-            </div>
-        </div>
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <!--<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script>
-            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>');
-        </script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+            {% endif %}
+
+        {% endblock %}
+
+        {% block javascript %}
+            <!-- Bootstrap core JavaScript
+    ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+            <!--<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>-->
+            <script type="text/javascript" src="{{asset('MDB-Free/js/jquery-2.2.3.min.js')}}"></script>
+            <script>
+                window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>');
+            </script>
+            <script type="text/javascript" src="{{ asset('MDB-Free/js/tether.min.js') }}"></script>
+            <script type="text/javascript" src=" {{ asset('MDB-Free/js/mdb.min.js' )}} "></script>
+            <script type="text/javascript" src="{{ asset('MDB-Free/js/bootstrap.min.js') }}"></script>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-filestyle/1.2.1/bootstrap-filestyle.min.js"></script>
+            <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+            <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+        {% endblock %}
+
     </body>
 </html>

@@ -3,16 +3,16 @@
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
-    
+
     role_hierarchy:
         ROLE_PARTICULIER: ROLE_USER
         ROLE_ASSOS:       ROLE_USER
         ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN, ROLE_PARTICULIER, ROLE_ASSOS       
-    
+        ROLE_SUPER_ADMIN: ROLE_ADMIN, ROLE_PARTICULIER, ROLE_ASSOS
+
     providers:
         fos_userbundle:
-            id: fos_user.user_provider.username
+            id: fos_user.user_provider.username_email
 
     firewalls:
         main:
@@ -35,3 +35,4 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/create/donation, role: ROLE_PARTICULIER }

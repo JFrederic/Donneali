@@ -1,3 +1,9 @@
 donations_donations_homepage:
     path:     /
     defaults: { _controller: DonationsDonationsBundle:Default:index }
+
+myapp_don_rechercher:
+  pattern: /don/rechercher
+  defaults: { _controller: DonationsDonationsBundle:Default:rechercher }
+  requirements:
+    _method: POST|GET
